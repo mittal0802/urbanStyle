@@ -5,6 +5,7 @@ import {
   signInWithGooglePopup,
   createUserDocumentFromAuth,
   signInAuthUserFromEmailAndPassword,
+  passwordReset,
 } from "../../utils/firebase/firebase.utils";
 import { useState } from "react";
 
@@ -17,14 +18,40 @@ const SignInForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
 
+  const handleForgotPassword = async () => {
+    try {
+      await passwordReset(email);
+      alert("Password reset email sent. Please check your inbox.");
+    } catch (error) {
+      switch (error.code) {
+        case "auth/missing-email":
+          alert("Please enter an email address.");
+          break;
+        case "auth/invalid-email":
+          alert("Invalid email address.");
+          break;
+        case "auth/user-not-found":
+          alert("User not found.");
+          break;
+        default:
+          alert("Error resetting password.");
+      }
+      console.log(error.message);
+    }
+  };
+
   const onChangeHandler = (event) => {
     const { name, value } = event.target;
     setFormFields({ ...formFields, [name]: value });
   };
 
-  const handleChange = async (event) => {
-    const { users } = await signInWithGooglePopup();
-    await createUserDocumentFromAuth(users);
+  const signInWithGoogle = async (event) => {
+    try {
+      const { user } = await signInWithGooglePopup();
+      await createUserDocumentFromAuth(user);
+    } catch (error) {
+      console.log("Error signing in with google", error.message);
+    }
   };
 
   const resetFormFields = () => {
@@ -34,10 +61,11 @@ const SignInForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const { users } = await signInAuthUserFromEmailAndPassword(
+      const { user } = await signInAuthUserFromEmailAndPassword(
         email,
         password
       );
+      await createUserDocumentFromAuth(user);
       resetFormFields();
     } catch (error) {
       if (error.code === "auth/wrong-password") {
@@ -70,13 +98,17 @@ const SignInForm = () => {
           onChange={onChangeHandler}
           value={password}
         />
+
         <div className="buttons-container">
           <Button type="submit">SIGN IN</Button>
-          <Button type="button" onClick={handleChange} buttonType="google">
+          <Button type="button" onClick={signInWithGoogle} buttonType="google">
             SIGN IN WITH GOOGLE
           </Button>
         </div>
       </form>
+      <a onClick={handleForgotPassword} className="forgot-pass" href="#">
+        Forgot Password?
+      </a>
     </div>
   );
 };
