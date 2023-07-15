@@ -1,0 +1,81 @@
+.sign-up-container {
+    display: flex;
+    flex-direction: column;
+    width: 380px;
+
+    h2 {
+        margin: 10px 0;
+    }
+
+    .buttons-container {
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .sign-up-container {
+        width: 90%;
+    }
+
+    h2 {
+        font-size: 1.4rem;
+    }
+
+    .buttons-container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .buttons-container>* {
+        margin-top: 15px;
+        /* Add margin between components in column layout */
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .sign-up-container {
+        flex-direction: column;
+        width: 90%;
+    }
+
+    h2 {
+        font-size: 1.4rem;
+    }
+
+    .buttons-container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .buttons-container>* {
+        margin-top: 15px;
+        /* Add margin between components in column layout */
+    }
+}
+
+/* When the screen size is 992px or smaller */
+@media screen and (max-width: 992px) {
+    .sign-up-container {
+        flex-direction: column;
+        width: 90%;
+    }
+
+    h2 {
+        font-size: 1.4rem;
+    }
+}
+
+/* When the screen size is 1200px or smaller */
+@media screen and (max-width: 1200px) {
+    .sign-up-container {
+        flex-direction: column;
+        width: 90%;
+    }
+
+    h2 {
+        font-size: 1.4rem;
+    }
+}
