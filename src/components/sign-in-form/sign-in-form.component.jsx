@@ -42,10 +42,10 @@ const SignInForm = () => {
       );
       resetFormFields();
     } catch (error) {
-      if ((error.code = "auth/wrong-password")) {
+      if (error.code === "auth/wrong-password") {
         alert("Wrong Password");
       }
-      if ((error.code = "auth/user-not-found")) {
+      if (error.code === "auth/user-not-found") {
         alert("User doesn't exist");
       }
       console.log("Error signing in", error.message);
@@ -74,7 +74,11 @@ const SignInForm = () => {
         />
         <div className="buttons-container">
           <Button type="submit">SIGN IN</Button>
-          <Button onClick={signInWithGoogleRedirect} buttonType="google">
+          <Button
+            type="button"
+            onClick={signInWithGoogleRedirect}
+            buttonType="google"
+          >
             GOOGLE SIGN IN
           </Button>
         </div>
