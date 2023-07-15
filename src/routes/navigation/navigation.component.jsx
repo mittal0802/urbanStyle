@@ -1,12 +1,27 @@
-import { Outlet } from "react-router-dom"
-import {Fragment} from 'react';
+import { Link, Outlet } from "react-router-dom";
+import { Fragment } from "react";
+import "./navigation.styles.scss";
+import { ReactComponent as USlogo } from "../../assets/urbanstyle-logo.svg";
+import Footer from "../../components/footer/footer.component";
+
 const Navigation = () => (
   <Fragment>
-    <div className="Navigation"> 
-      <h1>I am the Navigation Bar</h1>
+    <div className="navigation">
+      <Link className="logo-container" to="/">
+        <USlogo className="logo" />
+      </Link>
+      <div className="nav-links-container">
+        <Link className="nav-link" to="/shop">
+          SHOP
+        </Link>
+        <Link className="nav-link" to="/signup">
+          SIGNUP
+        </Link>
+      </div>
     </div>
     <Outlet />
+    <Footer />
   </Fragment>
-)
+);
 
 export default Navigation;
