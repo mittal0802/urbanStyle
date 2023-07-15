@@ -1,14 +1,12 @@
 import "./sign-in-form.styles.scss";
 import Button from "../button/button.component";
-import { getRedirectResult } from "firebase/auth";
 import FormInput from "../form-input/form-input.component";
 import {
-  auth,
-  signInWithGoogleRedirect,
+  signInWithGooglePopup,
   createUserDocumentFromAuth,
   signInAuthUserFromEmailAndPassword,
 } from "../../utils/firebase/firebase.utils";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 const defaultFormFields = {
   email: "",
@@ -16,17 +14,17 @@ const defaultFormFields = {
 };
 
 const SignInForm = () => {
-  //   useEffect(async () => {
-  //     //const { users } = await getRedirectResult(auth);
-  //     //await createUserDocumentFromAuth(users);
-  //     //resetFormFields();
-  //   }, []);
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
 
   const onChangeHandler = (event) => {
     const { name, value } = event.target;
     setFormFields({ ...formFields, [name]: value });
+  };
+
+  const handleChange = async (event) => {
+    const { users } = await signInWithGooglePopup();
+    await createUserDocumentFromAuth(users);
   };
 
   const resetFormFields = () => {
@@ -74,12 +72,8 @@ const SignInForm = () => {
         />
         <div className="buttons-container">
           <Button type="submit">SIGN IN</Button>
-          <Button
-            type="button"
-            onClick={signInWithGoogleRedirect}
-            buttonType="google"
-          >
-            GOOGLE SIGN IN
+          <Button type="button" onClick={handleChange} buttonType="google">
+            SIGN IN WITH GOOGLE
           </Button>
         </div>
       </form>
