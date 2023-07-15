@@ -13,7 +13,7 @@ function App() {
       <Route path="/" element={<Navigation />} >
         <Route index element={<Home />} />
         <Route path="shop" element={<Shop />} />
-        <Route path="signup" element={<Signup />} />
+        <Route path="signin" element={<Signup />} />
       </Route>
     </Routes>
    </Fragment>
