@@ -1,16 +1,16 @@
-import { useState } from "react";
+import {
+  signInWithGooglePopup,
+  createUserDocumentFromAuth,
+} from "../../utils/firebase/firebase";
 
 const Signup = () => {
+  const logGoogleUser = async () => {
+    const { user } = await signInWithGooglePopup();
+    const userDocRef = await createUserDocumentFromAuth(user);
+  };
   return (
     <div className="">
-      <label>Display Name</label>
-      <input type="text" />
-      <label>Email</label>
-      <input type="email" />
-      <label>Password</label>
-      <input type="text" />
-      <label>Confirm Password</label>
-      <input type="password" />
+      <button onClick={logGoogleUser}>Sign Up</button>
     </div>
   );
 };

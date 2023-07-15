@@ -10,21 +10,21 @@ const Footer = () => {
             target="_blank"
             rel="noreferrer"
           >
-            <i class="fa fa-github fa-2x" aria-hidden="true"></i>
+            <i className="fa fa-github fa-2x" aria-hidden="true"></i>
           </a>
           <a
             href="https://www.instagram.com/keshav2002_/"
             target="_blank"
             rel="noreferrer"
           >
-            <i class="fa fa-instagram fa-2x" aria-hidden="true"></i>
+            <i className="fa fa-instagram fa-2x" aria-hidden="true"></i>
           </a>
           <a
             href="https://www.linkedin.com/in/keshav-mittal-43588b1a1/"
             target="_blank"
             rel="noreferrer"
           >
-            <i class="fa fa-linkedin-square fa-2x" aria-hidden="true"></i>
+            <i className="fa fa-linkedin-square fa-2x" aria-hidden="true"></i>
           </a>
         </div>
         <div className="contact-details">
