@@ -3,12 +3,10 @@ import Button from "../button/button.component";
 import FormInput from "../form-input/form-input.component";
 import {
   signInWithGooglePopup,
-  createUserDocumentFromAuth,
   signInAuthUserFromEmailAndPassword,
   passwordReset,
 } from "../../utils/firebase/firebase.utils";
-import { useState, useContext } from "react";
-import { UserContext } from "../../contexts/user.context";
+import { useState } from "react";
 
 const defaultFormFields = {
   email: "",
@@ -18,8 +16,6 @@ const defaultFormFields = {
 const SignInForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
-
-  const { setCurrentUser } = useContext(UserContext);
 
   const handleForgotPassword = async () => {
     try {
@@ -50,8 +46,7 @@ const SignInForm = () => {
 
   const signInWithGoogle = async (event) => {
     try {
-      const { user } = await signInWithGooglePopup();
-      setCurrentUser(user);
+      await signInWithGooglePopup();
     } catch (error) {
       console.log("Error signing in with google", error.message);
     }
@@ -64,12 +59,7 @@ const SignInForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const { user } = await signInAuthUserFromEmailAndPassword(
-        email,
-        password
-      );
-
-      setCurrentUser(user);
+      await signInAuthUserFromEmailAndPassword(email, password);
       resetFormFields();
     } catch (error) {
       if (error.code === "auth/wrong-password") {
