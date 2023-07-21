@@ -1,0 +1,11 @@
+.ad-marquee-container{
+    overflow: hidden;
+    margin-bottom:10px;
+    position: relative;
+
+    .marquee-item{
+        display: inline-block;
+        margin-right: 100px;
+        /* Add space between each marquee item */
+    }
+}
