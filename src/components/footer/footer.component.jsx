@@ -4,6 +4,7 @@ const Footer = () => {
   return (
     <footer className="footer">
       <div className="footer-content">
+        <h1>Connect With Us</h1>
         <div className="social-icons">
           <a
             href="https://github.com/mittal0802/urbanStyle"
@@ -28,8 +29,8 @@ const Footer = () => {
           </a>
         </div>
         <div className="contact-details">
-          <p>Email: contact@urbanstyle.com (f)</p>
-          <p>Phone: 110041548 (f)</p>
+          <h3>Email: contact@urbanstyle.com</h3>
+          <h3>Phone: 110041548, 9599999555</h3>
         </div>
         <div className="slogan">
           <p>UrbanStyle: Where Fashion Meets Comfort!</p>
