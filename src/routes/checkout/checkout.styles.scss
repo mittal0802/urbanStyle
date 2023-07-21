@@ -1,15 +1,15 @@
 .checkout-container {
     width: 55%;
-    min-height: 90vh;
+    min-height: 50vh;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    margin: 50px auto 0;
+    margin: 40px auto 0;
 
     .checkout-header {
         width: 100%;
         padding: 10px 0;
         display: flex;
+        font-weight: bolder;
         justify-content: space-between;
         border-bottom: 1px solid darkgrey;
 
@@ -27,5 +27,27 @@
         margin-top: 30px;
         margin-left: auto;
         font-size: 36px;
+    }
+}
+@media (max-width: 768px) {
+    .checkout-container {
+        width: 85%;
+        margin: 20px auto 0;
+
+        .checkout-header{
+        .header-block {
+                width: 20%;
+                /* Adjust the width for smaller screens */
+                font-size: 13px;
+                &:last-child {
+                        width: 12%;
+                    }
+                /* Adjust the font size for smaller screens */
+            }
+        }
+        .total {
+             font-size: 20px;
+                    /* Adjust the font size for smaller screens */
+        }
     }
 }

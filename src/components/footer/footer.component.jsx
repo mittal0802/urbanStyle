@@ -4,7 +4,7 @@ const Footer = () => {
   return (
     <footer className="footer">
       <div className="footer-content">
-        <h1>Connect With Us</h1>
+        <span className="connect">Connect With Us</span>
         <div className="social-icons">
           <a
             href="https://github.com/mittal0802/urbanStyle"

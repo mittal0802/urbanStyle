@@ -1,5 +1,6 @@
 .navigation {
     height: 89px;
+    font-size: 18px;
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -35,6 +36,10 @@
             cursor: pointer;
         }
     }
+         @media (max-width: 768px) {
+             /* Adjust the dimensions for smaller screens (e.g., mobile devices) */
+             font-size: 16px;
+         }
 }
 .display-user {
     display: flex;
