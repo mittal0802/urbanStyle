@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import {onAuthStateChanged, getAuth, signOut, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, createUserWithEmailAndPassword ,signInWithRedirect, GoogleAuthProvider} from "firebase/auth";
+import {setPersistence, browserSessionPersistence, onAuthStateChanged, getAuth, signOut, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, createUserWithEmailAndPassword ,signInWithRedirect, GoogleAuthProvider} from "firebase/auth";
 import {getFirestore, doc, getDoc, setDoc} from "firebase/firestore";
 
 const firebaseConfig = {
@@ -20,6 +20,7 @@ googleProvider.setCustomParameters({
 
 //auth
 export const auth = getAuth(firebaseApp);
+setPersistence(auth, browserSessionPersistence);
 export const signInWithGooglePopup = () => signInWithPopup(auth, googleProvider);
 export const signInWithGoogleRedirect = () => signInWithRedirect(auth, googleProvider);
 
