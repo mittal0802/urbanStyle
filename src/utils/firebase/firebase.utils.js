@@ -79,3 +79,10 @@ export const onAuthStateChangedListener = (callback) =>
 {
   return onAuthStateChanged(auth, callback);
 }
+/**
+ * 
+ * onAuthStateChanged(auth, callback, error, completed)
+ * next: callback
+ * error: errorcallback
+ * completed: completecallback
+ */
