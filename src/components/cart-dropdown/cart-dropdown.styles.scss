@@ -1,0 +1,58 @@
+.cart-dropdown-container {
+    position: absolute;
+    width: 240px;
+    height: 340px;
+    /* Adjust the height or use max-height for responsiveness */
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border: 1px solid black;
+    background-color: white;
+    top: 90px;
+    right: 40px;
+    z-index: 5;
+
+
+    .empty-message {
+        font-size: 18px;
+        margin: 50px auto;
+    }
+
+    .cart-items {
+        display: flex;
+        flex: 1;
+        /* Use flex: 1 to make the cart-items container take up remaining space */
+        overflow: auto;
+        flex-direction: column;
+        /* Use overflow: auto to add scrollbars only when needed */
+    }
+
+    button {
+        margin-top: 10px;
+        /* Add some spacing between the cart items and the button */
+    }
+}
+
+/* Media query for responsiveness */
+@media (max-width: 768px) {
+    .cart-dropdown-container {
+        width: 60%;
+        height: 300px;
+        /* Remove the max-height on smaller screens */
+        top: 70px;
+        /* Adjust the position for smaller screens */
+        right: 40px;
+        /* Center the cart dropdown container on smaller screens */
+        
+        .cart-items {
+            max-height: 200px;
+            /* Adjust the max-height for smaller screens if needed */
+        }
+
+        button{
+            bottom: 0px;
+            /* Remove the margin-top on smaller screens */
+        }
+    }
+
+}
