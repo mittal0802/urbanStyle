@@ -1,8 +1,7 @@
 // FooterComponent.scss
 
 .footer {
-    background-color: #f3f3f3;
-        border: 20px solid #efe6e6;
+    background: linear-gradient(to bottom, white, #96b1c7);
         margin-top: 20px;
         padding: 20px;
         text-align: center;
@@ -10,7 +9,6 @@
         right: 0;
         position: relative;
         bottom: 0;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 
     .footer-content {
         display: flex;
