@@ -3,14 +3,14 @@
     display: flex;
     min-height: 80px;
     border-bottom: 1px solid darkgrey;
-    padding: 12px 0;
+    padding: 5px 0;
     font-size: 18px;
     align-items: center;
     justify-content: space-between;
     
     .image-container {
         width: 12%;
-        padding-right: 15px;
+        padding-right: 60px;
 
         img {
             width: 100%;
@@ -27,18 +27,18 @@
         display: flex;
 
         .arrow {
-            padding: 0 10px;
             cursor: pointer;
+            font-weight: bolder;
         }
 
         .value {
             margin: 0 10px;
         }
     }
-
     .remove-button {
-        padding-left: 12px;
+        width: 6.5%;
         cursor: pointer;
+        font-weight: bolder;
     }
 }
 @media (max-width: 768px) {
@@ -46,10 +46,17 @@
         width: 100%;
         min-height: 60px;
         font-size: 15px;
+
+        .name,.price,.quantity{
+            font-size: 12px;
+        }
         
         .image-container {
             width: 18%;
             padding-right: 15px;
+        }
+        .remove-button{
+            width: 7%;
         }
     }
 }

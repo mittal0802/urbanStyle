@@ -7,26 +7,34 @@ const CheckOutItem = ({ cartItem }) => {
     useContext(CartContext);
 
   const { name, imageUrl, price, quantity } = cartItem;
+
+  const addItemHandler = () => {
+    addItemToCart(cartItem);
+  };
+  const removeItemHandler = () => {
+    removeItemFromCart(cartItem);
+  };
+  const deleteItemHandler = () => {
+    deleteItemFromCart(cartItem);
+  };
+
   return (
     <div className="checkout-item-container">
       <div className="image-container">
         <img src={imageUrl} alt={`${name}`} />
       </div>
       <span className="name">{name}</span>
-      <div className="quantity">
-        <span className="arrow" onClick={() => removeItemFromCart(cartItem)}>
+      <span className="quantity">
+        <div className="arrow" onClick={removeItemHandler}>
           &lt;
-        </span>
-        {quantity}
-        <span className="arrow" onClick={() => addItemToCart(cartItem)}>
+        </div>
+        <span className="value">{quantity}</span>
+        <div className="arrow" onClick={addItemHandler}>
           &gt;
-        </span>
-      </div>
+        </div>
+      </span>
       <span className="price">₹{price}</span>
-      <span
-        className="remove-button"
-        onClick={() => deleteItemFromCart(cartItem)}
-      >
+      <span className="remove-button" onClick={deleteItemHandler}>
         &#10005;
       </span>
     </div>

@@ -3,7 +3,7 @@ import CheckOutItem from "../../components/checkout-item/checkout-item.component
 import { CartContext } from "../../contexts/cart.context";
 import { useContext } from "react";
 const CheckOut = () => {
-  const { cartItems } = useContext(CartContext);
+  const { cartItems, cartTotal } = useContext(CartContext);
   return (
     <div className="checkout-container">
       <div className="checkout-header">
@@ -16,10 +16,7 @@ const CheckOut = () => {
       {cartItems.map((item) => (
         <CheckOutItem key={item.id} cartItem={item} />
       ))}
-      <div className="total">
-        TOTAL: ₹
-        {cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0)}
-      </div>
+      <div className="total">TOTAL: ₹{cartTotal}</div>
     </div>
   );
 };
