@@ -3,7 +3,6 @@ import { Fragment, useContext } from "react";
 import "./navigation.styles.scss";
 import { ReactComponent as USlogo } from "../../assets/urbanstyle-logo.svg";
 import Footer from "../../components/footer/footer.component";
-import { ReactComponent as CartLogo } from "../../assets/shopping-bag.svg";
 import { UserContext } from "../../contexts/user.context";
 import { signOutAuthUser } from "../../utils/firebase/firebase.utils";
 import CartIcon from "../../components/cart-icon/cart-icon.component";
