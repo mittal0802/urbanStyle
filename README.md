@@ -14,6 +14,14 @@ UrbanStyle is a modern and user-friendly React-based e-commerce application that
 
 - **Responsive Design**: Enjoy a seamless shopping experience on all devices, from desktops to smartphones.
 
+## Future Plan
+
+1. **Detailed Product Page**: Enhance the shopping experience with detailed product pages featuring size options, color choices, product descriptions, and customer reviews.
+
+2. **Product Filters**: Implement advanced filtering options to allow users to narrow down product searches based on various criteria such as price range, category, brand, and more.
+
+3. **Payment through Crypto Wallet**: Explore the integration of cryptocurrency payments, providing users with an alternative and secure method to complete their purchases.
+
 ## Installation and Usage
 
 1. Clone the repository:
