@@ -1,4 +1,3 @@
-import AdMarquee from "../../components/ad-marquee/ad-marquee.component";
 import Directory from "../../components/directory/directory.component";
 function Home() {
   const categories = [
