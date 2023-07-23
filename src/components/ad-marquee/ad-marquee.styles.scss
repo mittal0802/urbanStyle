@@ -1,11 +1,18 @@
 .ad-marquee-container{
     overflow: hidden;
-    margin-bottom:10px;
     position: relative;
+    padding-bottom: 20px;
 
     .marquee-item{
-        display: inline-block;
-        margin-right: 100px;
-        /* Add space between each marquee item */
+        display: flex;
+        border: 0.5px #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        margin-right: 70px;
+        white-space: nowrap;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        &:hover {
+            background-color: #f2f2f2;
+        }
     }
 }

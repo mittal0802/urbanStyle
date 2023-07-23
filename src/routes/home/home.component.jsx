@@ -31,7 +31,6 @@ function Home() {
 
   return (
     <div>
-      <AdMarquee />
       <Directory categories={categories} />
     </div>
   );
