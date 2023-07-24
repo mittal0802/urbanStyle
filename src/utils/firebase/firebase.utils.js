@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import {setPersistence, browserSessionPersistence, onAuthStateChanged, getAuth, signOut, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, createUserWithEmailAndPassword ,signInWithRedirect, GoogleAuthProvider} from "firebase/auth";
-import {getFirestore, doc, getDoc, setDoc, collection, query,getDocs, writeBatch} from "firebase/firestore";
+import {getFirestore, doc, getDoc, setDoc, collection, query,getDocs, writeBatch, updateDoc} from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBR9rf21kw5ZhtXe1JxD1uCW9k7PzjdydQ",
@@ -70,8 +70,16 @@ export const getCategoriesAndCollections = async () => {
   return categoryMap;
 }
 
+export const UpdateDocument = async (collectionName, documentName, updateObject) => {
+  const documentRef = doc(db, collectionName, documentName);
+  await updateDoc(documentRef, updateObject);
+}
 
-
+export const getUserCartItems = async (collectionName, userId) => {
+  const documentRef = doc(db, collectionName, userId);
+  const documentSnapshot = await getDoc(documentRef);
+  return documentSnapshot.data().cartItems;
+}
 
 
 export const createUserDocumentFromAuth = async (userAuth, additionalInformation = {}) =>{

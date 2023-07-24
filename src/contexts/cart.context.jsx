@@ -1,4 +1,10 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState, useContext } from "react";
+import {
+  UpdateDocument,
+  onAuthStateChangedListener,
+  getUserCartItems,
+} from "../utils/firebase/firebase.utils";
+import { UserContext } from "./user.context";
 
 const addCartItem = (cartItems, productToAdd) => {
   //check for if item aleady exists in cart
@@ -53,6 +59,7 @@ export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
   const [cartCount, setCartCount] = useState(0);
   const [cartTotal, setCartTotal] = useState(0);
+  const { currentUser } = useContext(UserContext);
 
   useEffect(() => {
     const newCartCount = cartItems.reduce(
@@ -63,12 +70,35 @@ export const CartProvider = ({ children }) => {
   }, [cartItems]);
 
   useEffect(() => {
+    const getCartItems = async () => {
+      if (currentUser) {
+        const userCartItems = await getUserCartItems("users", currentUser.uid);
+        setCartItems(userCartItems);
+      }
+    };
+    getCartItems();
+  }, [currentUser]);
+
+  useEffect(() => {
+    if (currentUser) UpdateDocument("users", currentUser.uid, { cartItems });
+  }, [cartItems]);
+
+  useEffect(() => {
     const newCartTotal = cartItems.reduce(
       (total, cartItem) => total + cartItem.quantity * cartItem.price,
       0
     );
     setCartTotal(newCartTotal);
   }, [cartItems]);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChangedListener((user) => {
+      if (!user) {
+        setCartItems([]);
+      }
+    });
+    return unsubscribe;
+  }, []);
 
   const addItemToCart = (productToAdd) => {
     setCartItems(addCartItem(cartItems, productToAdd));

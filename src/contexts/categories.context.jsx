@@ -1,8 +1,5 @@
 import { createContext, useState, useEffect } from "react";
-import {
-  getCategoriesAndCollections,
-  addCollectionAndDocuments,
-} from "../utils/firebase/firebase.utils.js";
+import { getCategoriesAndCollections } from "../utils/firebase/firebase.utils.js";
 
 // This is one time data upload to the firestore database.
 // import SHOP_DATA from "../shop-data.js";
