@@ -1,6 +1,12 @@
-import { Link, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { Fragment, useContext } from "react";
-import "./navigation.styles.scss";
+import {
+  NavigationContainer,
+  NavLinksContainer,
+  DisplayUser,
+  LogoContainer,
+  NavLink,
+} from "./navigation.styles";
 import { ReactComponent as USlogo } from "../../assets/urbanstyle-logo.svg";
 import Footer from "../../components/footer/footer.component";
 import { UserContext } from "../../contexts/user.context";
@@ -15,34 +21,32 @@ const Navigation = () => {
 
   return (
     <Fragment>
-      <div className="navigation">
-        <Link className="logo-container" to="/">
+      <NavigationContainer>
+        <LogoContainer to="/">
           <USlogo className="logo" />
-        </Link>
-        <div className="nav-links-container">
-          <Link className="nav-link" to="/shop">
-            SHOP
-          </Link>
+        </LogoContainer>
+        <NavLinksContainer>
+          <NavLink to="/shop">SHOP</NavLink>
           {currentUser ? (
-            <span className="nav-link" onClick={signOutAuthUser}>
+            <NavLink as="span" onClick={signOutAuthUser}>
               SIGN OUT
-            </span>
+            </NavLink>
           ) : (
-            <Link className="nav-link" to="/auth">
+            <NavLink className="nav-link" to="/auth">
               SIGN IN
-            </Link>
+            </NavLink>
           )}
           <CartIcon />
-        </div>
+        </NavLinksContainer>
         {isCartOpen && <CartDropdown />}
-      </div>
-      <div className="display-user">
+      </NavigationContainer>
+      <DisplayUser>
         {currentUser && currentUser.displayName
           ? `Hello, ${currentUser.displayName}`
           : currentUser
           ? `Hello, ${currentUser.email.split("@")[0]}`
           : "Hello, Guest"}
-      </div>
+      </DisplayUser>
       <Outlet />
       <Footer />
     </Fragment>
