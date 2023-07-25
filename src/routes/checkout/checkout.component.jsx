@@ -4,6 +4,7 @@ import {
   CheckoutHeaderBlock,
   CheckoutTotal,
 } from "./checkout.styles";
+import PaymentForm from "../../components/payment-form/payment-form.component";
 import CheckOutItem from "../../components/checkout-item/checkout-item.component";
 import { CartContext } from "../../contexts/cart.context";
 import { useContext } from "react";
@@ -22,6 +23,7 @@ const CheckOut = () => {
         <CheckOutItem key={item.id} cartItem={item} />
       ))}
       <CheckoutTotal>TOTAL: ₹{cartTotal}</CheckoutTotal>
+      <PaymentForm />
     </CheckoutContainer>
   );
 };
