@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "styled-components";
 import { SearchBoxContainer, SearchIcon } from "./search-box.styles";
 
 const SearchBox = ({ placeholder, onSubmitHandler }) => (

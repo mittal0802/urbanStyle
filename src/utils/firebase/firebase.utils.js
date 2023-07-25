@@ -75,11 +75,6 @@ export const UpdateDocument = async (collectionName, documentName, updateObject)
   await updateDoc(documentRef, updateObject);
 }
 
-export const getUserCartItems = async (collectionName, userId) => {
-  const documentRef = doc(db, collectionName, userId);
-  const documentSnapshot = await getDoc(documentRef);
-  return documentSnapshot.data().cartItems;
-}
 
 
 export const createUserDocumentFromAuth = async (userAuth, additionalInformation = {}) =>{
@@ -88,17 +83,19 @@ export const createUserDocumentFromAuth = async (userAuth, additionalInformation
   }
   const userRef = doc(db, 'users', userAuth.uid);
   const userSnapshot = await getDoc(userRef);
-
+  
   //if user data does not exist in the database, create it
   //set the user data in the database from userAuth
   if(!userSnapshot.exists()){
     const {displayName, email} = userAuth;
+    const cartItems = [];
     const createdAt = new Date();
     try{
       await setDoc(userRef, {
         displayName,
         email,
         createdAt,
+        cartItems,
         ...additionalInformation
       });
     }
@@ -109,6 +106,14 @@ export const createUserDocumentFromAuth = async (userAuth, additionalInformation
   return userRef;
 }
 
+export const getUserCartItems = async (collectionName, userId) => {
+  const documentRef = doc(db, collectionName, userId);
+  const documentSnapshot = await getDoc(documentRef);
+  if(documentSnapshot.exists())
+    return documentSnapshot.data().cartItems;
+  else
+    return [];
+}
 export const createAuthUserFromEmailAndPassword = async (email, password) =>{
   if(!email || !password){
     return;
