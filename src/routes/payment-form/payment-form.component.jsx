@@ -4,17 +4,21 @@ import {
   FormContainer,
   CardElementContainer,
 } from "./payment-form.styles";
-import Button from "../button/button.component";
+import Button from "../../components/button/button.component";
 import { CartContext } from "../../contexts/cart.context";
 import { useContext, useState } from "react";
 import { UserContext } from "../../contexts/user.context";
-import Alert from "../alert-menu/alert.component";
+import Alert from "../../components/alert-menu/alert.component";
+import AddressForm from "../../components/address-form/address-form.component";
+import { OrderContext } from "../../contexts/orders.context";
+import { Fragment } from "react";
 
 const PaymentForm = () => {
   const stripe = useStripe();
   const elements = useElements();
-  const { cartTotal, setCartItems } = useContext(CartContext);
-  const { currentUser } = useContext(UserContext);
+  const { cartTotal, setCartItems, cartItems } = useContext(CartContext);
+  const { addTransactionToOrders } = useContext(OrderContext);
+  const { currentUser, userAddress } = useContext(UserContext);
   const [showAlert, setShowAlert] = useState(false);
   const [error, setError] = useState("");
   const [isTransactionInProcess, setTransactionInProcess] = useState(false);
@@ -30,6 +34,11 @@ const PaymentForm = () => {
       setError("Cart is Empty. Please add items to cart.");
       return;
     }
+    if (!userAddress) {
+      setShowAlert(true);
+      setError("Please add shipping address.");
+      return;
+    }
     setTransactionInProcess(true);
     if (!stripe || !elements) return;
     try {
@@ -40,7 +49,9 @@ const PaymentForm = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ amount: cartTotal * 100 }),
+          body: JSON.stringify({
+            amount: (cartTotal + (cartTotal ? 150 : 0)) * 100,
+          }),
         }
       ).then((res) => {
         return res.json();
@@ -54,15 +65,25 @@ const PaymentForm = () => {
           card: elements.getElement(CardElement),
           billing_details: {
             name: currentUser.displayName,
+            email: currentUser.email,
           },
         },
       });
-      console.log(paymentResult);
+
       if (paymentResult.error) {
         setShowAlert(true);
         setError("Payment Failed. Please try again.");
       }
       if (paymentResult.paymentIntent.status === "succeeded") {
+        const payment_id = paymentResult.paymentIntent.id;
+        const transaction = {
+          id: payment_id,
+          items: cartItems,
+          amount: cartTotal + (cartTotal ? 150 : 0),
+          date: new Date(),
+          address: userAddress,
+        };
+        addTransactionToOrders(transaction);
         setShowAlert(true);
         setError("success");
         setCartItems([]);
@@ -75,23 +96,30 @@ const PaymentForm = () => {
     }
   };
   return (
-    <PaymentFormContainer>
-      <FormContainer onSubmit={paymentHandler}>
-        <h3>Credit Card Payment: </h3>
-        <CardElementContainer />
-        <Button disable={isTransactionInProcess}>Pay Now</Button>
-      </FormContainer>
-      {showAlert &&
-        (error === "success" ? (
-          <Alert
-            alertType="success"
-            message="Payment Successful. Thanks for your order."
-            onClose={handleHideAlert}
-          />
-        ) : (
-          <Alert alertType="error" message={error} onClose={handleHideAlert} />
-        ))}
-    </PaymentFormContainer>
+    <Fragment>
+      <AddressForm />
+      <PaymentFormContainer>
+        <FormContainer onSubmit={paymentHandler}>
+          <h3>Credit Card Payment: </h3>
+          <CardElementContainer />
+          <Button disabled={isTransactionInProcess}>Pay Now</Button>
+        </FormContainer>
+        {showAlert &&
+          (error === "success" ? (
+            <Alert
+              alertType="success"
+              message="Payment Successful. Thanks for your order."
+              onClose={handleHideAlert}
+            />
+          ) : (
+            <Alert
+              alertType="error"
+              message={error}
+              onClose={handleHideAlert}
+            />
+          ))}
+      </PaymentFormContainer>
+    </Fragment>
   );
 };
 

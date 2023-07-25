@@ -1,4 +1,4 @@
-import { createContext, useEffect, useReducer } from "react";
+import { createContext, useEffect, useReducer, useState } from "react";
 import {
   createUserDocumentFromAuth,
   onAuthStateChangedListener,
@@ -9,6 +9,8 @@ export const UserContext = createContext({
   //for the initialise for context
   currentUser: null,
   setCurrentUser: () => null,
+  userAddress: null,
+  setUserAddress: () => null,
 });
 
 export const USER_ACTION_TYPES = {
@@ -37,6 +39,7 @@ export const UserProvider = ({ children }) => {
   // const [currentUser, setCurrentUser] = useState(null);
 
   const [{ currentUser }, dispatch] = useReducer(userReducer, INITIAL_STATE);
+  const [userAddress, setUserAddress] = useState(null);
   const setCurrentUser = (user) => {
     dispatch({
       type: USER_ACTION_TYPES.SET_CURRENT_USER,
@@ -44,7 +47,7 @@ export const UserProvider = ({ children }) => {
     });
   };
 
-  const value = { currentUser, setCurrentUser };
+  const value = { currentUser, setCurrentUser, userAddress, setUserAddress };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChangedListener((user) => {

@@ -1,0 +1,86 @@
+/* AddressForm.css */
+
+.address-form-container {
+  width: 60%;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto 30px auto;
+
+  .checkout-summary {
+    width: 35%;
+    display: flex;
+    flex-direction: column;
+    .summary-heading {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+      margin-left: 15px;
+    }
+
+    .list-group-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 0;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid #dee2e6;
+
+      span {
+        font-size: 1rem;
+      }
+
+      &:last-child {
+        border-bottom: 0;
+      }
+
+      strong {
+        font-size: 1.2rem;
+      }
+
+      p {
+        font-size: 0.8rem;
+        color: #6c757d;
+        margin: 0;
+      }
+    }
+  }
+  .address-form {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    .billing-heading {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .currentAddressContainer {
+      .currentAddress {
+        height: 120px;
+        border: 1px solid #dee2e6;
+        padding: 10px;
+        margin-bottom: 30px;
+      }
+    }
+    input {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+    button {
+      margin: 0 0 0 auto;
+    }
+  }
+  @media (max-width: 768px) {
+    width: 80%;
+    flex-direction: column;
+    .checkout-summary {
+      width: 90%;
+      .summary-heading {
+        margin-top: 10px;
+      }
+    }
+    .address-form {
+      width: 90%;
+      margin: 0 auto 0 auto;
+    }
+  }
+}

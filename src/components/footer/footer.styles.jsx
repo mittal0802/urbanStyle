@@ -24,6 +24,7 @@ export const FooterContent = styled.div`
 export const FooterConnect = styled.span`
   font-size: 32px;
   font-weight: bold;
+  padding-top: 20px;
   margin-bottom: 20px;
 
   @media (max-width: 768px) {

@@ -7,9 +7,19 @@ export const CheckoutContainer = styled.div`
   flex-direction: column;
   margin: 40px auto 0;
 
+  button {
+    margin-left: auto;
+    margin-top: 50px;
+  }
+
   @media (max-width: 768px) {
     width: 85%;
     margin: 20px auto 0;
+
+    button {
+      margin: 70px auto 0 auto;
+      width: 70%;
+    }
   }
 `;
 
