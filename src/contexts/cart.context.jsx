@@ -61,6 +61,7 @@ export const CartProvider = ({ children }) => {
   const [cartTotal, setCartTotal] = useState(0);
   const { currentUser } = useContext(UserContext);
 
+  //update cart count when cart items change
   useEffect(() => {
     const newCartCount = cartItems.reduce(
       (total, cartItem) => total + cartItem.quantity,
@@ -69,6 +70,7 @@ export const CartProvider = ({ children }) => {
     setCartCount(newCartCount);
   }, [cartItems]);
 
+  //get cart items from firebase on user login
   useEffect(() => {
     const getCartItems = async () => {
       if (currentUser) {
@@ -79,10 +81,12 @@ export const CartProvider = ({ children }) => {
     getCartItems();
   }, [currentUser]);
 
+  //update cart items in firebase when cart items change
   useEffect(() => {
     if (currentUser) UpdateDocument("users", currentUser.uid, { cartItems });
   }, [cartItems]);
 
+  //update cart total when cart items change
   useEffect(() => {
     const newCartTotal = cartItems.reduce(
       (total, cartItem) => total + cartItem.quantity * cartItem.price,
@@ -91,6 +95,7 @@ export const CartProvider = ({ children }) => {
     setCartTotal(newCartTotal);
   }, [cartItems]);
 
+  //clear cart items when user logs out as cart items are stored in firebase and user cannot add items when signed out
   useEffect(() => {
     const unsubscribe = onAuthStateChangedListener((user) => {
       if (!user) {

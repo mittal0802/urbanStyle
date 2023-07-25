@@ -1,11 +1,11 @@
 import { Routes, Route } from "react-router-dom";
-import CategoriesPreview from "../categories-preview/categories-preview.component.jsx/categories-preview.component";
+import FinalShopPage from "../final-shop-page/final-shop-page.component";
 import Category from "../category/category.component";
 
 const Shop = () => {
   return (
     <Routes>
-      <Route index element={<CategoriesPreview />} />
+      <Route index element={<FinalShopPage />} />
       <Route path=":category" element={<Category />} />
     </Routes>
   );

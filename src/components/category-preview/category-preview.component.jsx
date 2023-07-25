@@ -3,7 +3,6 @@ import {
   CategoryTitle,
   Preview,
 } from "./category-preview.styles";
-import { Link } from "react-router-dom";
 
 import ProductCard from "../product-card/product-card.component";
 

@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import CategoryPreview from "../../../components/category-preview/category-preview.component";
-import { CategoriesContext } from "../../../contexts/categories.context";
+import CategoryPreview from "../category-preview/category-preview.component";
+import { CategoriesContext } from "../../contexts/categories.context";
 import styled from "styled-components";
 
 const CategoriesPreviewContainer = styled.div`
