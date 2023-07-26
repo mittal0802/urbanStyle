@@ -19,7 +19,11 @@ export const FormContainer = styled.form`
     margin-top: 30px;
     margin-left: auto;
   }
-
+  span {
+    color: red;
+    display: block;
+    margin-top: 15px;
+  }
   @media (max-width: 768px) {
     min-width: 90%;
 

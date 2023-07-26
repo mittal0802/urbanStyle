@@ -1,19 +1,11 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import "./past-order.styles.scss";
 
 const PastOrder = ({ order }) => {
-  const { id, amount, date, items, address } = order;
-
-  const order_date = date
-    ? date.toDate().toLocaleDateString("en-US", {
-        month: "long",
-        day: "numeric",
-        year: "numeric",
-      })
-    : null;
-  const itemTotal = ((amount - 150) * 100) / 118;
-  // State to control card expansion
   const [expanded, setExpanded] = useState(false);
+
+  const { id, amount, date, items, address } = order;
+  const itemTotal = ((amount - 150) * 100) / 118;
 
   // Function to handle card click and toggle expansion
   const handleCardClick = () => {
@@ -30,7 +22,7 @@ const PastOrder = ({ order }) => {
           <strong>Order ID: </strong> {id}
         </p>
         <p>
-          <strong>Order Date: </strong> {order_date}
+          <strong>Order Date: </strong> {date.split("G")[0]}
         </p>
         <p>
           <strong>Order Total: </strong> ₹{amount} (Including Gst and ₹150
@@ -77,7 +69,7 @@ const PastOrder = ({ order }) => {
                 <strong>Delivery & Packaging:</strong> ₹150
               </p>
               <p>
-                <strong>Tax:</strong> ₹{(amount - itemTotal).toFixed(2)}
+                <strong>Tax:</strong> ₹{(amount - itemTotal - 150).toFixed(2)}
               </p>
               <p>
                 <strong>Order Total:</strong> ₹{amount}
