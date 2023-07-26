@@ -6,6 +6,7 @@ import CheckOut from './routes/checkout/checkout.component';
 import { Routes, Route} from 'react-router-dom';
 import { Fragment } from 'react';
 import PaymentForm from './routes/payment-form/payment-form.component';
+import PastOrdersPage from './routes/past-orders-page/past-orders-page.component';
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         <Route path="auth" element={<Authentication />} />
         <Route path="checkout" element={<CheckOut />} />
         <Route path="payment" element={<PaymentForm />} />
+        <Route path="orders" element={<PastOrdersPage />} />
       </Route>
     </Routes>
    </Fragment>

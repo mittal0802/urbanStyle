@@ -33,7 +33,12 @@ export const NavLinksContainer = styled.div`
 
   @media (max-width: 768px) {
     /* Adjust the dimensions for smaller screens (e.g., mobile devices) */
-    font-size: 16px;
+    width: 70%;
+    font-size: 15px;
+  }
+
+  @media (max-width: 360px) {
+    font-size: 12px;
   }
 `;
 
@@ -43,7 +48,7 @@ export const NavLink = styled(Link)`
   cursor: pointer;
 
   @media (max-width: 768px) {
-    padding: 5px 5px;
+    padding: 4px 4px;
   }
 `;
 
@@ -55,4 +60,9 @@ export const DisplayUser = styled.div`
   margin-right: 10px;
   padding-bottom: 20px;
   font-weight: bold;
+
+  @media (max-width: 768px) {
+    /* Adjust the dimensions for smaller screens (e.g., mobile devices) */
+    font-size: 15px;
+  }
 `;

@@ -14,10 +14,14 @@ import { signOutAuthUser } from "../../utils/firebase/firebase.utils";
 import CartIcon from "../../components/cart-icon/cart-icon.component";
 import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component";
 import { CartContext } from "../../contexts/cart.context";
-
+import { useNavigate } from "react-router-dom";
 const Navigation = () => {
   const { currentUser } = useContext(UserContext);
   const { isCartOpen } = useContext(CartContext);
+  const navigate = useNavigate();
+  const toOrder = () => {
+    navigate("/orders");
+  };
 
   return (
     <Fragment>
@@ -36,16 +40,18 @@ const Navigation = () => {
               SIGN IN
             </NavLink>
           )}
+          {currentUser ? <NavLink to="/orders">ORDERS</NavLink> : <Fragment />}
           <CartIcon />
         </NavLinksContainer>
         {isCartOpen && <CartDropdown />}
       </NavigationContainer>
       <DisplayUser>
+        Hello,&nbsp;
         {currentUser && currentUser.displayName
-          ? `Hello, ${currentUser.displayName}`
+          ? currentUser.displayName
           : currentUser
-          ? `Hello, ${currentUser.email.split("@")[0]}`
-          : "Hello, Guest"}
+          ? currentUser.email.split("@")[0]
+          : "Guest"}
       </DisplayUser>
       <Outlet />
       <Footer />
