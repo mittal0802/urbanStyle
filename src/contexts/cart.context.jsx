@@ -1,11 +1,11 @@
-import { createContext, useEffect, useState, useContext } from "react";
+import { createContext, useEffect, useContext, useReducer } from "react";
 import {
   UpdateDocument,
   onAuthStateChangedListener,
   getUserCartItems,
 } from "../utils/firebase/firebase.utils";
 import { UserContext } from "./user.context";
-
+import { createAction } from "../utils/reducer/reducer.utils";
 const addCartItem = (cartItems, productToAdd) => {
   //check for if item aleady exists in cart
   const existingCartItem = cartItems.find(
@@ -45,38 +45,92 @@ const removeCartItem = (cartItems, productToRemove) => {
 
 export const CartContext = createContext({
   isCartOpen: false,
-  setIsCartOpen: () => {},
+  updateCartItemsReducer: () => {},
   cartItems: [],
-  setCartItems: () => {},
-  addItemToCart: () => {},
   cartCount: 0,
   cartTotal: 0,
+  setCartItems: () => {},
+  addItemToCart: () => {},
   deleteItemFromCart: () => {},
   removeItemFromCart: () => {},
 });
 
+const CART_ACTION_TYPES = {
+  SET_CART_ITEMS: "SET_CART_ITEMS",
+  SET_IS_CART_OPEN: "SET_IS_CART_OPEN",
+};
+const INITIAL_STATE = {
+  isCartOpen: false,
+  cartItems: [],
+  cartCount: 0,
+  cartTotal: 0,
+};
+
+const cartReducer = (state, action) => {
+  const { type, payload } = action;
+  switch (type) {
+    case CART_ACTION_TYPES.SET_CART_ITEMS:
+      return {
+        ...state,
+        ...payload,
+      };
+    case CART_ACTION_TYPES.SET_IS_CART_OPEN:
+      return {
+        ...state,
+        isCartOpen: payload,
+      };
+    default:
+      throw new Error(`Unknown action type: "${type}" in cartReducer`);
+  }
+};
 export const CartProvider = ({ children }) => {
-  const [isCartOpen, setIsCartOpen] = useState(false);
-  const [cartItems, setCartItems] = useState([]);
-  const [cartCount, setCartCount] = useState(0);
-  const [cartTotal, setCartTotal] = useState(0);
+  const [{ isCartOpen, cartItems, cartCount, cartTotal }, dispatch] =
+    useReducer(cartReducer, INITIAL_STATE);
   const { currentUser } = useContext(UserContext);
 
   //update cart count when cart items change
-  useEffect(() => {
-    const newCartCount = cartItems.reduce(
+
+  const updateCartItemsReducer = (newCartItems) => {
+    const newCartCount = newCartItems.reduce(
       (total, cartItem) => total + cartItem.quantity,
       0
     );
-    setCartCount(newCartCount);
-  }, [cartItems]);
+    const newCartTotal = newCartItems.reduce(
+      (total, cartItem) => total + cartItem.quantity * cartItem.price,
+      0
+    );
+    dispatch(
+      createAction(CART_ACTION_TYPES.SET_CART_ITEMS, {
+        cartItems: newCartItems,
+        cartCount: newCartCount,
+        cartTotal: newCartTotal,
+      })
+    );
+  };
+
+  const addItemToCart = (productToAdd) => {
+    const newCartItems = addCartItem(cartItems, productToAdd);
+    updateCartItemsReducer(newCartItems);
+  };
+  const deleteItemFromCart = (productToDelete) => {
+    const newCartItems = deleteCartItem(cartItems, productToDelete);
+    updateCartItemsReducer(newCartItems);
+  };
+  const removeItemFromCart = (productToRemove) => {
+    const newCartItems = removeCartItem(cartItems, productToRemove);
+    updateCartItemsReducer(newCartItems);
+  };
+
+  const setIsCartOpen = (isOpen) => {
+    dispatch(createAction(CART_ACTION_TYPES.SET_IS_CART_OPEN, isOpen));
+  };
 
   //get cart items from firebase on user login
   useEffect(() => {
     const getCartItems = async () => {
       if (currentUser) {
         const userCartItems = await getUserCartItems("users", currentUser.uid);
-        setCartItems(userCartItems);
+        updateCartItemsReducer(userCartItems);
       }
     };
     getCartItems();
@@ -87,40 +141,21 @@ export const CartProvider = ({ children }) => {
     if (currentUser) UpdateDocument("users", currentUser.uid, { cartItems });
   }, [cartItems]);
 
-  //update cart total when cart items change
-  useEffect(() => {
-    const newCartTotal = cartItems.reduce(
-      (total, cartItem) => total + cartItem.quantity * cartItem.price,
-      0
-    );
-    setCartTotal(newCartTotal);
-  }, [cartItems]);
-
   //clear cart items when user logs out as cart items are stored in firebase and user cannot add items when signed out
   useEffect(() => {
     const unsubscribe = onAuthStateChangedListener((user) => {
       if (!user) {
-        setCartItems([]);
+        updateCartItemsReducer([]);
       }
     });
     return unsubscribe;
   }, []);
 
-  const addItemToCart = (productToAdd) => {
-    setCartItems(addCartItem(cartItems, productToAdd));
-  };
-  const deleteItemFromCart = (productToDelete) => {
-    setCartItems(deleteCartItem(cartItems, productToDelete));
-  };
-  const removeItemFromCart = (productToRemove) => {
-    setCartItems(removeCartItem(cartItems, productToRemove));
-  };
-
   const value = {
     isCartOpen,
     setIsCartOpen,
     cartItems,
-    setCartItems,
+    updateCartItemsReducer,
     addItemToCart,
     deleteItemFromCart,
     removeItemFromCart,

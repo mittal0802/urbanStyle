@@ -16,7 +16,8 @@ import Spinner from "../../components/spinner/spinner.component";
 const PaymentForm = () => {
   const stripe = useStripe();
   const elements = useElements();
-  const { cartTotal, setCartItems, cartItems } = useContext(CartContext);
+  const { cartTotal, updateCartItemsReducer, cartItems } =
+    useContext(CartContext);
   const { addTransactionToOrders } = useContext(OrderContext);
   const { currentUser, userAddress } = useContext(UserContext);
   const [showAlert, setShowAlert] = useState(false);
@@ -86,7 +87,7 @@ const PaymentForm = () => {
         addTransactionToOrders(transaction);
         setShowAlert(true);
         setError("success");
-        setCartItems([]);
+        updateCartItemsReducer([]);
       }
       setTransactionInProcess(false);
     } catch (error) {

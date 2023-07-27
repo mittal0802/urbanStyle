@@ -52,7 +52,6 @@ export const OrderProvider = ({ children }) => {
 
   const value = {
     orders,
-    setOrders,
     addTransactionToOrders,
   };
 
