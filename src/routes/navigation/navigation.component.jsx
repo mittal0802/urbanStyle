@@ -48,7 +48,6 @@ const Navigation = () => {
           ? currentUser.email.split("@")[0]
           : "Guest"}
       </DisplayUser>
-
       <Outlet />
       <Footer />
     </Fragment>

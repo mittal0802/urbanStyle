@@ -1,14 +1,5 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { ReactComponent as Carousel } from "../../assets/carousel.svg";
-
-export const CarouselContainer = styled(Carousel)`
-  width: 90%;
-  height: 100%;
-  margin: auto;
-  margin-top: 0px;
-  margin-left: 5%;
-`;
 
 export const NavigationContainer = styled.div`
   height: 62px;
