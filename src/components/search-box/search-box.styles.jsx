@@ -4,21 +4,31 @@ export const SearchBoxContainer = styled.div`
   display: flex;
   margin: 30px auto 30px auto;
   width: 30%;
+  background: linear-gradient(
+    180deg,
+    rgba(221, 221, 221, 0.4) 0%,
+    rgba(221, 221, 221, 0) 100%
+  );
+  border-radius: 7.91992px;
   padding: 10px;
   height: 30px;
   align-items: center;
-  border: 1px solid #ccc;
   outline: none;
   font-size: 18px;
   border-radius: 5px;
   font-weight: bold;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 
   input {
     flex: 1;
     border: none;
+    background: linear-gradient(
+      180deg,
+      rgba(221, 221, 221, 0.4) 0%,
+      rgba(221, 221, 221, 0) 0%
+    );
+    color: #6e6f72;
     outline: none;
-    font-family: "Roboto Condensed";
+    font-family: "Open Sans", sans-serif;
     font-size: 18px;
     font-weight: bold;
 
@@ -40,4 +50,5 @@ export const SearchBoxContainer = styled.div`
 
 export const SearchIcon = styled("i").attrs({ className: "fa fa-search" })`
   margin-right: 15px;
+  color: #6e6f72;
 `;

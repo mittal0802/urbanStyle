@@ -2,13 +2,13 @@ import styled from "styled-components";
 import { CardElement } from "@stripe/react-stripe-js";
 
 export const PaymentFormContainer = styled.div`
-  margin: 0px auto;
+  margin: 0px auto 50px auto;
   width: 40%;
   display: flex;
   flex-direction: column;
 
   @media (max-width: 768px) {
-    margin: 0px auto;
+    margin: 0px auto 50px auto;
     width: 80%;
   }
 `;

@@ -7,19 +7,22 @@ import {
   passwordReset,
 } from "../../utils/firebase/firebase.utils";
 import { useState } from "react";
-import Alert from "../alert-menu/alert.component";
+import Toast from "../additional-components/toast/toast.component";
 
 const defaultFormFields = {
   email: "",
   password: "",
 };
 const statusMessages = {
-  1: "Please enter an email address for password reset.",
-  2: "Invalid email address.",
-  3: "User not found.",
-  4: "Error resetting password.",
-  5: "Wrong Password",
-  6: "Password reset email sent. Please check your inbox.",
+  1: { color: "red", message: "Please enter your email." },
+  2: { color: "red", message: "Email address is not valid." },
+  3: { color: "red", message: "User not found." },
+  4: { color: "red", message: "Something went wrong. Please try again." },
+  5: { color: "red", message: "Incorrect password." },
+  6: {
+    color: "green",
+    message: "Password reset email sent. Please Check your Inbox",
+  },
 };
 
 const SignInForm = () => {
@@ -27,10 +30,6 @@ const SignInForm = () => {
   const { email, password } = formFields;
   const [error, setError] = useState(null);
   const [showAlert, setShowAlert] = useState(false);
-
-  const handleHideAlert = () => {
-    setShowAlert(false);
-  };
 
   const handleForgotPassword = async () => {
     try {
@@ -55,6 +54,10 @@ const SignInForm = () => {
           setError(statusMessages[4]);
           setShowAlert(true);
       }
+      setTimeout(() => {
+        setShowAlert(false);
+        setError(null);
+      }, 5000);
       console.log(error.message);
     }
   };
@@ -92,6 +95,10 @@ const SignInForm = () => {
       }
       console.log("Error signing in", error.message);
     }
+    setTimeout(() => {
+      setShowAlert(false);
+      setError(null);
+    }, 5000);
   };
   return (
     <div className="sign-up-container">
@@ -125,16 +132,7 @@ const SignInForm = () => {
       <a onClick={handleForgotPassword} className="forgot-pass" href="#">
         Forgot Password?
       </a>
-      {showAlert &&
-        (error === statusMessages[6] ? (
-          <Alert
-            message={error}
-            onClose={handleHideAlert}
-            alertType="message"
-          />
-        ) : (
-          <Alert message={error} onClose={handleHideAlert} alertType="error" />
-        ))}
+      {showAlert && <Toast color={error.color} message={error.message} />}
     </div>
   );
 };

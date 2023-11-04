@@ -1,7 +1,6 @@
 import Directory from "../../components/directory/directory.component";
 import Newsletter from "../../components/additional-components/newsletter/newsletter.component";
 import CarouselBanner from "../../components/additional-components/carousel/carousel.component";
-// import SaleBannerComponent from "../../components/additional-components/sale-banner/sale-banner.component";
 import { ReactComponent as Brands } from "../../assets/brands.svg";
 function Home() {
   const categories = [

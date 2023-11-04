@@ -3,7 +3,6 @@
   display: flex;
   flex-direction: column;
   height: 360px;
-  background: #fbffdc;
   align-items: center;
   position: relative;
 
@@ -11,6 +10,7 @@
     width: 100%;
     height: 90%;
     object-fit: cover;
+    border-radius: 9.9px;
     margin-bottom: 5px;
   }
 
@@ -35,16 +35,19 @@
   .product-card-details {
     width: 90%;
     height: 5%;
+    font-family: "poppins", sans-serif;
     display: flex;
     justify-content: space-between;
     font-size: 18px;
 
     .name {
       width: 80%;
+      font-weight: 500;
       margin-bottom: 15px;
     }
 
     .price {
+      color: #757575;
       width: 15%;
     }
   }

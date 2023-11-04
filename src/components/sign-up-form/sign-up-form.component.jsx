@@ -6,12 +6,15 @@ import {
 import FormInput from "../form-input/form-input.component";
 import "./sign-up-form.styles.scss";
 import Button from "../button/button.component";
-import Alert from "../alert-menu/alert.component";
+import Toast from "../additional-components/toast/toast.component";
 
 const statusMessages = {
-  1: "Email already in use",
-  2: "Passwords don't match",
-  3: "Password should be at least 6 characters",
+  1: {
+    color: "red",
+    message: "Email already in use. Please enter a different email",
+  },
+  2: { color: "red", message: "Both Passwords do not match" },
+  3: { color: "red", message: "Password should be at least 6 characters long" },
 };
 const defaultFormFields = {
   displayName: "",
@@ -25,10 +28,6 @@ const SignUpForm = () => {
   const { displayName, email, password, confirmPassword } = formFields;
   const [error, setError] = useState(null);
   const [showAlert, setShowAlert] = useState(false);
-
-  const handleHideAlert = () => {
-    setShowAlert(false);
-  };
 
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
@@ -58,6 +57,10 @@ const SignUpForm = () => {
       }
       console.log("User creation encountered an error", error);
     }
+    setTimeout(() => {
+      setShowAlert(false);
+      setError(null);
+    }, 5000);
   };
 
   const handleChange = (event) => {
@@ -105,9 +108,7 @@ const SignUpForm = () => {
           value={confirmPassword}
         />
         <Button type="submit">Sign Up</Button>
-        {showAlert && (
-          <Alert message={error} onClose={handleHideAlert} alertType="error" />
-        )}
+        {showAlert && <Toast color={error.color} message={error.message} />}
       </form>
     </div>
   );

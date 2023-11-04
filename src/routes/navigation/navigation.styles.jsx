@@ -8,17 +8,22 @@ export const NavigationContainer = styled.div`
   font-weight: 500;
   margin: auto;
   margin-top: 36px;
-  width: 90%;
+  width: 80%;
   display: flex;
   justify-content: space-between;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    font-size: 12px;
+    margin-top: 10px;
+  }
 `;
 export const LogoContainer = styled(Link)`
   height: 50px;
   width: 15%;
   padding: auto;
   @media (max-width: 768px) {
-    height: 69px;
-    width: 150px;
+    width: 30%;
     padding: 10px;
     }
     .logo {
@@ -29,28 +34,19 @@ export const LogoContainer = styled(Link)`
 `;
 
 export const NavLinksContainer = styled.div`
-  width: 44%;
   height: 62px;
+  width: 70%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-
-  @media (max-width: 768px) {
-    /* Adjust the dimensions for smaller screens (e.g., mobile devices) */
-    width: 70%;
-    font-size: 15px;
-  }
-
-  @media (max-width: 360px) {
-    font-size: 12px;
-  }
+  //justify to end
+  justify-content: flex-end;
 `;
 
 export const NavLink = styled(Link)`
-  padding: 10px 10px;
   cursor: pointer;
   width: 16%;
-
+  margin: 0 10px;
+  text-align: center;
   .signup {
     background-color: #e5c643;
     color: #fff;
@@ -58,8 +54,12 @@ export const NavLink = styled(Link)`
     padding: 10px 10px;
     text-decoration: none;
   }
+  &:hover {
+    color: #e6c744;
+    scale: 1.1;
+  }
   @media (max-width: 768px) {
-    padding: 4px 4px;
+    width: 100%;
   }
 `;
 

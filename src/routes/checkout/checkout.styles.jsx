@@ -5,7 +5,7 @@ export const CheckoutContainer = styled.div`
   min-height: 50vh;
   display: flex;
   flex-direction: column;
-  margin: 40px auto 0;
+  margin: 40px auto 40px auto;
 
   button {
     margin-left: auto;

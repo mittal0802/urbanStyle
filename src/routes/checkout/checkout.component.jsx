@@ -10,20 +10,19 @@ import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../../components/button/button.component";
 import Alert from "../../components/alert-menu/alert.component";
+import Toast from "../../components/additional-components/toast/toast.component";
 
 const CheckOut = () => {
   const { cartItems, cartTotal } = useContext(CartContext);
   const navigate = useNavigate();
   const [showAlert, setShowAlert] = useState(false);
-  const [error, setError] = useState("");
-  const handleHideAlert = () => {
-    setShowAlert(false);
-  };
 
   const onCheckOut = () => {
     if (cartTotal === 0) {
       setShowAlert(true);
-      setError("Cart is Empty. Please add items to cart.");
+      setTimeout(() => {
+        setShowAlert(false);
+      }, 5000);
       return;
     }
     navigate("/payment");
@@ -44,7 +43,10 @@ const CheckOut = () => {
       <CheckoutTotal>TOTAL: ₹{cartTotal}</CheckoutTotal>
       <Button onClick={onCheckOut}>CheckOut</Button>
       {showAlert && (
-        <Alert alertType="error" message={error} onClose={handleHideAlert} />
+        <Toast
+          color="red"
+          message={"Cart is Empty! Please add items to cart."}
+        />
       )}
     </CheckoutContainer>
   );
