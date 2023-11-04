@@ -7,19 +7,23 @@ import {
 import Button from "../../components/button/button.component";
 import { CartContext } from "../../contexts/cart.context";
 import { useContext, useState } from "react";
-import { UserContext } from "../../contexts/user.context";
+import { selectCurrentUser } from "../../store/user/user.selector";
+import { selectUserAddress } from "../../store/user/user.selector";
 import Alert from "../../components/alert-menu/alert.component";
 import AddressForm from "../../components/address-form/address-form.component";
 import { OrderContext } from "../../contexts/orders.context";
 import { Fragment } from "react";
 import Spinner from "../../components/spinner/spinner.component";
+import { useSelector } from "react-redux";
+
 const PaymentForm = () => {
   const stripe = useStripe();
   const elements = useElements();
   const { cartTotal, updateCartItemsReducer, cartItems } =
     useContext(CartContext);
   const { addTransactionToOrders } = useContext(OrderContext);
-  const { currentUser, userAddress } = useContext(UserContext);
+  const currentUser = useSelector(selectCurrentUser);
+  const userAddress = useSelector(selectUserAddress);
   const [showAlert, setShowAlert] = useState(false);
   const [error, setError] = useState("");
   const [isTransactionInProcess, setTransactionInProcess] = useState(false);

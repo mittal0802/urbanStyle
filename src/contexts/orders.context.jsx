@@ -1,10 +1,11 @@
-import { createContext, useEffect, useState, useContext } from "react";
+import { createContext, useEffect, useState } from "react";
 import {
   UpdateDocument,
   onAuthStateChangedListener,
   getUserOrders,
 } from "../utils/firebase/firebase.utils";
-import { UserContext } from "./user.context";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "../store/user/user.selector";
 
 const addOrder = (orders, orderToAdd) => {
   //add orderToAdd object to orders object
@@ -19,7 +20,7 @@ export const OrderContext = createContext({
 
 export const OrderProvider = ({ children }) => {
   const [orders, setOrders] = useState([]);
-  const { currentUser } = useContext(UserContext);
+  const currentUser = useSelector(selectCurrentUser);
 
   //get past orders from firebase on user login
   useEffect(() => {

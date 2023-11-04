@@ -1,10 +1,11 @@
-import { createContext, useEffect, useContext, useReducer } from "react";
+import { createContext, useEffect, useReducer } from "react";
 import {
   UpdateDocument,
   onAuthStateChangedListener,
   getUserCartItems,
 } from "../utils/firebase/firebase.utils";
-import { UserContext } from "./user.context";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "../store/user/user.selector";
 import { createAction } from "../utils/reducer/reducer.utils";
 const addCartItem = (cartItems, productToAdd) => {
   //check for if item aleady exists in cart
@@ -86,7 +87,7 @@ const cartReducer = (state, action) => {
 export const CartProvider = ({ children }) => {
   const [{ isCartOpen, cartItems, cartCount, cartTotal }, dispatch] =
     useReducer(cartReducer, INITIAL_STATE);
-  const { currentUser } = useContext(UserContext);
+  const currentUser = useSelector(selectCurrentUser);
 
   //update cart count when cart items change
 

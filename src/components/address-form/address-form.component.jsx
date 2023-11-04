@@ -1,9 +1,12 @@
 import { useState, useContext } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { CartContext } from "../../contexts/cart.context";
-import { UserContext } from "../../contexts/user.context";
+import { selectUserAddress } from "../../store/user/user.selector";
+import { setUserAddress } from "../../store/user/user.action";
 import Button from "../button/button.component";
 import "./address-form.styles.scss";
 import FormInput from "../form-input/form-input.component";
+
 const defaultFormFields = {
   firstName: "",
   lastName: "",
@@ -14,8 +17,9 @@ const defaultFormFields = {
 const AddressForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { firstName, lastName, phone, address } = formFields;
-  const { userAddress, setUserAddress } = useContext(UserContext);
+  const userAddress = useSelector(selectUserAddress);
   const [isAddressAdded, setIsAddressAdded] = useState(false);
+  const dispatch = useDispatch();
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -23,11 +27,11 @@ const AddressForm = () => {
   };
   const AddressAddedHandler = () => {
     setIsAddressAdded(false);
-    setUserAddress(null);
+    dispatchEvent(setUserAddress(null));
   };
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setUserAddress({ ...formFields });
+    dispatch(setUserAddress({ ...formFields }));
     setFormFields(defaultFormFields);
     setIsAddressAdded(true);
   };

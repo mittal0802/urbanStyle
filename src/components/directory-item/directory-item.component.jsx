@@ -10,14 +10,13 @@ const DirectoryItem = ({ category }) => {
   };
 
   return (
-    <div className="directory-item-container">
-      <div
-        className="background-image"
-        style={{ backgroundImage: `url(${imageUrl})` }}
-      />
-      <div className="directory-item-body" onClick={onClickhandler}>
-        <h2>{title}</h2>
-        <p>Shop Now</p>
+    <div className="directory-item-container" onClick={onClickhandler}>
+      <div className="background-image">
+        <img src={imageUrl} alt="category" />
+      </div>
+      <div className="directory-item-body">
+        <h3>{title}</h3>
+        <p>Explore Now!</p>
       </div>
     </div>
   );

@@ -1,17 +1,30 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { ReactComponent as Carousel } from "../../assets/carousel.svg";
+
+export const CarouselContainer = styled(Carousel)`
+  width: 90%;
+  height: 100%;
+  margin: auto;
+  margin-top: 0px;
+  margin-left: 5%;
+`;
+
 export const NavigationContainer = styled.div`
-  height: 89px;
+  height: 62px;
   font-size: 18px;
-  width: 100%;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  margin: auto;
+  margin-top: 36px;
+  width: 90%;
   display: flex;
   justify-content: space-between;
-  background: linear-gradient(to top, white, #96b1c7);
 `;
 export const LogoContainer = styled(Link)`
   height: 50px;
-  width: 188.4px;
-  padding: 25px;
+  width: 15%;
+  padding: auto;
   @media (max-width: 768px) {
     height: 69px;
     width: 150px;
@@ -25,11 +38,11 @@ export const LogoContainer = styled(Link)`
 `;
 
 export const NavLinksContainer = styled.div`
-  width: 50%;
-  height: 100%;
+  width: 44%;
+  height: 62px;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
 
   @media (max-width: 768px) {
     /* Adjust the dimensions for smaller screens (e.g., mobile devices) */
@@ -44,9 +57,16 @@ export const NavLinksContainer = styled.div`
 
 export const NavLink = styled(Link)`
   padding: 10px 10px;
-  font-weight: bold;
   cursor: pointer;
+  width: 16%;
 
+  .signup {
+    background-color: #e5c643;
+    color: #fff;
+    border-radius: 10px;
+    padding: 10px 10px;
+    text-decoration: none;
+  }
   @media (max-width: 768px) {
     padding: 4px 4px;
   }

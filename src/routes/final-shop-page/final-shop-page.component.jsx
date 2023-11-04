@@ -1,7 +1,8 @@
 import SearchBox from "../../components/search-box/search-box.component";
 import CategoriesPreview from "../../components/categories-preview/categories-preview.component";
-import { CategoriesContext } from "../../contexts/categories.context";
-import { useState, useContext, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { selectCategoriesMap } from "../../store/categories/categories.selector";
+import { useState, useEffect } from "react";
 import SearchResults from "../../components/search-results/search-results.component";
 import styled from "styled-components";
 
@@ -12,7 +13,7 @@ const ShopPage = styled.div`
 const FinalShopPage = () => {
   const [searchField, setSearchField] = useState("");
   const [filteredProducts, setFilteredProducts] = useState([]);
-  const { categoriesMap } = useContext(CategoriesContext);
+  const categoriesMap = useSelector(selectCategoriesMap);
   const onSubmitChange = (event) => {
     if (event.key === "Enter" || event.target.value.length === 0) {
       const searchString = event.target.value.toLocaleLowerCase();

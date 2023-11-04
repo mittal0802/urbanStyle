@@ -1,68 +1,123 @@
 import styled from "styled-components";
 
 export const FooterContainer = styled.footer`
-  background: linear-gradient(to bottom, white, #96b1c7);
-  margin-top: 70px;
-  padding: 20px;
-  text-align: center;
-  left: 0;
-  right: 0;
-  position: relative;
-  bottom: 0;
-
-  @media (max-width: 768px) {
-    margin-top: 50px;
-  }
-`;
-
-export const FooterContent = styled.div`
+  background: #000000;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
+  bottom: 0;
 `;
 
-export const FooterConnect = styled.span`
-  font-size: 32px;
-  font-weight: bold;
-  padding-top: 20px;
-  margin-bottom: 20px;
+export const FooterBox = styled.div`
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  margin-top: 100px;
+  margin-bottom: 100px;
+  justify-content: space-between;
 
   @media (max-width: 768px) {
-    font-size: 20px;
+    width: 95%;
+    margin-top: 70px;
+    margin-bottom: 70px;
+    flex-direction: column;
+    align-items: center;
+  }
+`;
+
+export const CompanyInfo = styled.div`
+  width: 25%;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+
+  @media (max-width: 768px) {
+    margin-bottom: 50px;
+    align-items: center;
+    width: 90%;
+  }
+`;
+
+export const BrandName = styled.span`
+  font-size: 40px;
+  font-weight: bold;
+  font-family: Poppins, sans-serif;
+  color: #fff;
+  margin-bottom: 10px;
+
+  @media (max-width: 768px) {
+    font-size: 1.5em;
+  }
+`;
+
+export const BrandSlogan = styled.span`
+  font-size: 20px;
+  font-family: Roboto, sans-serif;
+  color: #8e8e8e;
+  margin-bottom: 35px;
+
+  @media (max-width: 768px) {
+    font-size: 15px;
   }
 `;
 
 export const SocialIcons = styled.div`
-  margin-bottom: 20px;
-
   a {
     display: inline-block;
     margin-right: 15px;
     &:hover {
-      transform: scale(1.2);
+      transform: scale(1.1);
     }
   }
-
   @media (max-width: 768px) {
-    margin-bottom: 10px;
+    a {
+      margin-right: 7.5px;
+      margin-left: 7.5px;
+    }
+    .responsive-svg {
+      width: 38px;
+      height: 38px;
+    }
   }
 `;
 
-export const ContactDetails = styled.div`
+export const OtherLinks = styled.div`
+  width: 50%;
   margin-bottom: 10px;
-  font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
 
   @media (max-width: 768px) {
-    font-size: 11px;
+    width: 90%;
   }
 `;
 
-export const FooterSlogan = styled.div`
-  font-size: 18px;
-  font-weight: bold;
-  color: #333;
+export const LinkBox = styled.div`
+  h3 {
+    color: #fff;
+  }
+  a {
+    display: block;
+    margin: 15px 0px;
+    color: #8e8e8e;
+    &:hover {
+      color: #fff;
+    }
+  }
+  font-family: Roboto, sans-serif;
+  font: 20px;
+  color: #8e8e8e;
 
   @media (max-width: 768px) {
-    font-size: 17px;
+    text-align: center;
+    h3 {
+      font-size: 1em;
+    }
+    a {
+      font-size: 0.8em;
+    }
   }
 `;

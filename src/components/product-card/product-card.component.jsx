@@ -2,19 +2,29 @@ import "./product-card.styles.scss";
 import { useContext, useState } from "react";
 import { CartContext } from "../../contexts/cart.context";
 import Button from "../button/button.component";
-import { UserContext } from "../../contexts/user.context";
-import Alert from "../alert-menu/alert.component";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "../../store/user/user.selector";
+import Toast from "../additional-components/toast/toast.component";
 
 const ProductCard = ({ product }) => {
   const { name, price, imageUrl } = product;
   const [showAlert, setShowAlert] = useState(false);
-  const handleHideAlert = () => {
-    setShowAlert(false);
-  };
-  const { currentUser } = useContext(UserContext);
+  const [showToast, setShowToast] = useState(false);
+  const currentUser = useSelector(selectCurrentUser);
   const { addItemToCart } = useContext(CartContext);
   const addProductToCart = () => {
-    currentUser ? addItemToCart(product) : setShowAlert(true);
+    if (currentUser) {
+      addItemToCart(product);
+      setShowToast(true);
+      setTimeout(() => {
+        setShowToast(false);
+      }, 5000);
+    } else {
+      setShowAlert(true);
+      setTimeout(() => {
+        setShowAlert(false);
+      }, 5000);
+    }
   };
   return (
     <div className="product-card-container">
@@ -27,11 +37,10 @@ const ProductCard = ({ product }) => {
         Add to cart
       </Button>
       {showAlert && (
-        <Alert
-          message="Please Sign In to add items to cart"
-          onClose={handleHideAlert}
-          alertType="error"
-        />
+        <Toast color="red" message="Please login to add items to cart!" />
+      )}
+      {showToast && (
+        <Toast color="green" message="Item added to cart successfully!" />
       )}
     </div>
   );
