@@ -23,6 +23,11 @@ const statusMessages = {
     color: "green",
     message: "Password reset email sent. Please Check your Inbox",
   },
+  7: {
+    color: "red",
+    message:
+      "Too many failed attempts. Please try again later or reset your password.",
+  },
 };
 
 const SignInForm = () => {
@@ -91,6 +96,10 @@ const SignInForm = () => {
       }
       if (error.code === "auth/user-not-found") {
         setError(statusMessages[3]);
+        setShowAlert(true);
+      }
+      if (error.code === "auth/too-many-requests") {
+        setError(statusMessages[7]);
         setShowAlert(true);
       }
       console.log("Error signing in", error.message);

@@ -8,9 +8,16 @@ import {
 import PastOrder from "../../components/past-order/past-order.component";
 import { useContext } from "react";
 import { OrderContext } from "../../contexts/orders.context";
-
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux/es/hooks/useSelector";
+import { selectCurrentUser } from "../../store/user/user.selector";
 const PastOrdersPage = () => {
   const { orders } = useContext(OrderContext);
+  const currentUser = useSelector(selectCurrentUser);
+  const navigate = useNavigate();
+  if (!currentUser) {
+    navigate("/");
+  }
   return (
     <PastOrdersPageContainer>
       <PageTitle>Order History</PageTitle>

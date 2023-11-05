@@ -13,7 +13,7 @@ export const NavigationContainer = styled.div`
   justify-content: space-between;
 
   @media (max-width: 768px) {
-    width: 100%;
+    width: 95%;
     font-size: 12px;
     margin-top: 10px;
   }
@@ -60,6 +60,7 @@ export const NavLink = styled(Link)`
   }
   @media (max-width: 768px) {
     width: 100%;
+    margin: 0 5px;
   }
 `;
 

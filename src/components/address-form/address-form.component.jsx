@@ -27,12 +27,11 @@ const AddressForm = () => {
   };
   const AddressAddedHandler = () => {
     setIsAddressAdded(false);
-    dispatchEvent(setUserAddress(null));
+    dispatch(setUserAddress({ ...defaultFormFields }));
   };
   const handleSubmit = async (event) => {
     event.preventDefault();
     dispatch(setUserAddress({ ...formFields }));
-    setFormFields(defaultFormFields);
     setIsAddressAdded(true);
   };
   const { cartTotal } = useContext(CartContext);

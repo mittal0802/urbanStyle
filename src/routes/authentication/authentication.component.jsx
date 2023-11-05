@@ -4,13 +4,16 @@ import { AuthenticationContainer } from "./authentication.styles";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { selectCurrentUser } from "../../store/user/user.selector";
+import { useEffect } from "react";
 
 const Authentication = () => {
   const currentUser = useSelector(selectCurrentUser);
   const navigate = useNavigate();
-  if (currentUser) {
-    navigate("/");
-  }
+  useEffect(() => {
+    if (currentUser) {
+      navigate("/");
+    }
+  }, [currentUser]);
   return (
     <AuthenticationContainer>
       <SignInForm />

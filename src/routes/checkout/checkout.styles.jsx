@@ -17,7 +17,7 @@ export const CheckoutContainer = styled.div`
     margin: 20px auto 0;
 
     button {
-      margin: 70px auto 0 auto;
+      margin: 70px auto 50px auto;
       width: 70%;
     }
   }

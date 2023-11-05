@@ -13,7 +13,7 @@ import Shop from "./routes/shop/shop.component";
 import Authentication from "./routes/authentication/authentication.component";
 import Navigation from "./routes/navigation/navigation.component";
 import CheckOut from "./routes/checkout/checkout.component";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { Fragment } from "react";
 import PaymentForm from "./routes/payment-form/payment-form.component";
 import PastOrdersPage from "./routes/past-orders-page/past-orders-page.component";
@@ -38,6 +38,11 @@ function App() {
     };
     getCategoriesMap();
   }, []);
+
+  const location = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
   return (
     <Fragment>
       <Routes>

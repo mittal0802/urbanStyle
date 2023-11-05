@@ -9,7 +9,6 @@ import { CartContext } from "../../contexts/cart.context";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../../components/button/button.component";
-import Alert from "../../components/alert-menu/alert.component";
 import Toast from "../../components/additional-components/toast/toast.component";
 
 const CheckOut = () => {

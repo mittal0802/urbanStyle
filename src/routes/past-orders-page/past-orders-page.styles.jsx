@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const PastOrdersPageContainer = styled.div`
   width: 100%;
   min-height: 50vh;
+  font-family: "Poppins", sans-serif;
   display: flex;
   flex-direction: column;
 `;
@@ -16,7 +17,7 @@ export const PastOrdersContainer = styled.div`
 
 export const PageTitle = styled.div`
   font-size: 30px;
-  font-weight: bold;
+  font-weight: 500;
   margin-top: 20px;
   text-align: center;
   margin-bottom: 20px;
