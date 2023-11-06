@@ -5,6 +5,7 @@ import Button from "../button/button.component";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../store/user/user.selector";
 import Toast from "../additional-components/toast/toast.component";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const ProductCard = ({ product }) => {
   const { name, price, imageUrl } = product;
@@ -28,7 +29,12 @@ const ProductCard = ({ product }) => {
   };
   return (
     <div className="product-card-container">
-      <img src={imageUrl} alt={`${name}`} />
+      <LazyLoadImage
+        className="image"
+        src={imageUrl}
+        alt={`${name}`}
+        loading="lazy"
+      />
       <div className="product-card-details">
         <span className="name">{name}</span>
         <span className="price">₹{price}</span>

@@ -23,6 +23,7 @@ const Footer = () => {
             <a
               href="https://github.com/mittal0802/urbanStyle"
               target="_blank"
+              className="github_icon"
               rel="noreferrer"
             >
               <Github />
@@ -30,6 +31,7 @@ const Footer = () => {
             <a
               href="https://www.instagram.com/keshav2002_/"
               target="_blank"
+              className="instagram_icon"
               rel="noreferrer"
             >
               <Instagram />
@@ -37,6 +39,7 @@ const Footer = () => {
             <a
               href="https://twitter.com/Keshav75519824"
               target="_blank"
+              className="twitter_icon"
               rel="noreferrer"
             >
               <Twitter />
@@ -45,6 +48,7 @@ const Footer = () => {
               href="https://www.linkedin.com/in/keshav-mittal-43588b1a1/"
               target="_blank"
               rel="noreferrer"
+              className="linkedin_icon"
             >
               <Linkedin />
             </a>

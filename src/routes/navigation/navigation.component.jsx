@@ -11,7 +11,6 @@ import {
   NavLink,
 } from "./navigation.styles";
 import { ReactComponent as USlogo } from "../../assets/urbanstyle-logo.svg";
-import Footer from "../../components/footer/footer.component";
 import { signOutAuthUser } from "../../utils/firebase/firebase.utils";
 import CartIcon from "../../components/cart-icon/cart-icon.component";
 import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component";
@@ -49,7 +48,6 @@ const Navigation = () => {
           : "Guest"}
       </DisplayUser>
       <Outlet />
-      <Footer />
     </Fragment>
   );
 };
